@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yangygs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        .media-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .media-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .media-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            overflow: auto;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .content::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+        #backgroundimg{
+            display: none;
+        }
+        #backgroundvideo{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="media-container">
+        <video id="backgroundvideo"  autoplay loop muted>
+            <source src="" type="video/mp4">
+        </video>
+        <img id="backgroundimg" src="">
+    </div>
+    <p id="yzm" style="display: none"></p>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const backgroundVideo = document.getElementById('backgroundvideo');
+        const backgroundimg = document.getElementById('backgroundimg');
+        const yzm = document.getElementById('yzm');
+        const width = window.innerWidth || document.documentElement.clientWidth||document.body.clientWidth;
+        const height = window.innerHeight || document.documentElement.clientHeight||document.body.clientHeight;
+        fetch('/base', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                width: width,
+                height: height
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            yzm.textContent = data.yzm;
+            if (data.type ==="mp4") {
+                backgroundVideo.style.display = 'block';
+                backgroundimg.style.display = 'none';
+                backgroundVideo.src = data.file;
+            }
+            else {
+                backgroundVideo.style.display = 'none';
+                backgroundimg.style.display = 'block';
+                backgroundimg.src = data.file;
+            }
+        })
+    })
+</script>
+</html>

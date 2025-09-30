@@ -1,1 +1,47 @@
-<p>yangygs </p>
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .home-content {
+        padding: 50px;
+        color: white;
+        text-align: center;
+        text-shadow: 0 0 10px rgba(0,0,0,0.7);
+    }
+    
+    .home-content h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+    }
+    
+    .home-content p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto 30px;
+        line-height: 1.6;
+    }
+    
+    .btn {
+        display: inline-block;
+        padding: 12px 30px;
+        background: rgba(255,255,255,0.2);
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        transition: all 0.3s;
+        border: 2px solid white;
+    }
+    
+    .btn:hover {
+        background: rgba(255,255,255,0.3);
+        transform: translateY(-3px);
+    }
+</style>
+
+<div class="home-content">
+    <h1>欢迎来到{{ username }}个人主页</h1>
+    <p>这里是我的个人空间，展示我的作品、经历和想法。探索更多内容，了解我的故事。</p>
+    <a href="/logout">yyyy</a>
+</div>
+{% endblock %}
