@@ -57,9 +57,9 @@ for option, value in opts:
 
 if options['clientid'] == '':
     if not python_version:
-        input_clientid = raw_input('请输入clientid：')
+        input_clientid = '101434435834'
     else:
-        input_clientid = str(input('请输入clientid：'))
+        input_clientid = '101434435834'
     if input_clientid != '':
         options['clientid'] = input_clientid
     else:
@@ -442,3 +442,4 @@ if __name__ == '__main__':
         except KeyboardInterrupt:
 
             sys.exit()
+
