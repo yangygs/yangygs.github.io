@@ -154,7 +154,7 @@ bufsize = 1024 # 吞吐量
 
 mainsocket = 0
 
-ClientId = ''
+ClientId = 101434435834
 pingtime = 0
 
 def getloacladdr(Tunnels, Url):
@@ -440,4 +440,5 @@ if __name__ == '__main__':
         except socket.error:
             pingtime = 0
         except KeyboardInterrupt:
+
             sys.exit()
